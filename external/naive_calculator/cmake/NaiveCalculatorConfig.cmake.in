@@ -1,0 +1,5 @@
+@PACKAGE_INIT@
+
+# if our project depends on other libraries here we should use find_dependency(...)
+
+include(${CMAKE_CURRENT_LIST_DIR}/NaiveCalculatorTargets.cmake)

@@ -9,8 +9,9 @@
  + https://cgold.readthedocs.io/en/latest/tutorials/variables.html
  + https://github.com/onqtam/awesome-cmake
 
-### Compile with unit test support
- + `cmake -D build_utest=ON -B build && cd build`
+### Build with unit test support
+ + `mkdir build && cd build`
+ + `cmake -D build_utest=ON`
  + `make`
  + `utest/test_naive_calculator`
  + Running utests:
@@ -33,8 +34,10 @@
    + see example in `CMakeLists.txt`
 
 ### Install
- + `cmake -DCMAKE_INSTALL_PREFIX=~/local/mathlib -B build && cd build`
- + `make && make install`
+ + `mkdir build && cd build`
+ + `cmake -DCMAKE_INSTALL_PREFIX=~/local/mathlib`
+ + `make`
+ + `make install`
 
 ### Packaging
  + `make package`

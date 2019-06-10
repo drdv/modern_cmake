@@ -1,4 +1,4 @@
-find_package(LATEX REQUIRED)
+find_package(LATEX)
 if(LATEX_FOUND)
   include(UseLATEX)
 
@@ -8,4 +8,6 @@ if(LATEX_FOUND)
   add_custom_target(open
     COMMAND open ${notes_filename}.pdf
     COMMENT "Open latex document.")
+else()
+  message("--> [SKIP] latex note")
 endif(LATEX_FOUND)

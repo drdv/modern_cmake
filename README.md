@@ -9,16 +9,20 @@
  + https://cgold.readthedocs.io/en/latest/tutorials/variables.html
  + https://github.com/onqtam/awesome-cmake
 
-### Build with unit test support
+### Build/install
  + `mkdir build && cd build`
- + `cmake -D build_utest=ON`
+ + `cmake -D CMAKE_INSTALL_PREFIX=~/local/mathlib ..`
  + `make`
- + `utest/test_naive_calculator`
- + Running utests:
+ + `make install`
+
+### Build with unit test support
+ + pass `-D build_utest=ON` to `cmake`
+ + Running unit tests:
    + `make test` (default option)
    + running the tests using the `ctest` command gives us more control
      + `ctest -R naive_calculator` would execute only `test_naive_calculator`
      + `ctest` has many useful flags (see `ctest --help`)
+   + of course we could run a unit test manually: `utest/test_naive_calculator`
 
 ### Docs
  + `make doxygen` (doxygen)
@@ -32,12 +36,6 @@
      + for header-only libraries we could rely on the unit-tests to include the headers
  + **option 2**: lint selected files on demand (using a custom target)
    + see example in `CMakeLists.txt`
-
-### Install
- + `mkdir build && cd build`
- + `cmake -DCMAKE_INSTALL_PREFIX=~/local/mathlib`
- + `make`
- + `make install`
 
 ### Packaging
  + `make package`

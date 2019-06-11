@@ -153,3 +153,13 @@ export(PACKAGE "${my_package_name}")
 set(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}.${CMAKE_PROJECT_VERSION}")
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
 include(CPack)
+
+# -----------------------------------------------------------
+# organize targets in an IDE
+# -----------------------------------------------------------
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set_target_properties(open doxygen lint
+  auxclean html pdf ps dvi safepdf
+  note note_pdf note_safepdf _note
+  note_html note_ps  note_auxclean note_dvi
+  PROPERTIES FOLDER internal)

@@ -8,9 +8,21 @@ set(my_package_name NaiveCalculator)
 # -----------------------------------------------------------
 # create a (shared library) target
 # -----------------------------------------------------------
-add_library(calculator SHARED
+set(calculator_headers
+  "${CMAKE_CURRENT_SOURCE_DIR}/calculator/core/operators.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/calculator/core/add.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/calculator/core/sub.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/calculator/core.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/calculator/utils.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/calculator/utils/ostream_specialization.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/calculator/private/private_utils.h")
+
+set(calculator_sources
   "${PROJECT_SOURCE_DIR}/calculator/core/add.cpp"
   "${PROJECT_SOURCE_DIR}/calculator/core/sub.cpp")
+
+# adding `calculator_headers` only affects what files are included in an IDE
+add_library(calculator SHARED "${calculator_sources}" "${calculator_headers}")
 
 target_include_directories(calculator
   PUBLIC
@@ -18,6 +30,10 @@ target_include_directories(calculator
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/calculator/private")
+
+# this permits to install the PUBLIC_HEADER below
+# otherwise we have to list them
+set_target_properties(calculator PROPERTIES PUBLIC_HEADER "${calculator_headers}")
 
 # This is needed in order to be able to use this library without
 # installing it first. This can be done by using
@@ -31,11 +47,8 @@ set(install_configdir "${CMAKE_INSTALL_LIBDIR}/cmake/${my_package_name}")
 
 install(TARGETS calculator
   EXPORT "${my_package_name}Targets"
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-install(DIRECTORY calculator/
-  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/calculator"
-  FILES_MATCHING PATTERN "*.h*")
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/calculator")
 
 install(FILES LICENSE
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/calculator")

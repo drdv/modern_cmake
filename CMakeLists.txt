@@ -16,7 +16,7 @@ set(CMAKE_DEBUG_POSTFIX "-d")
 # -----------------------------------------------------------
 option(enable_doxygen "Enables building doxygen docs" ON)
 option(build_notes    "Enable building latex notes"   ON)
-option(build_utest    "Enable/disable utests"         OFF)
+option(build_utest    "Enable/disable utests"         ON)
 
 # -----------------------------------------------------------
 # import the NaiveCalculator::calculator target
@@ -158,8 +158,12 @@ include(CPack)
 # organize targets in an IDE
 # -----------------------------------------------------------
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set_target_properties(open doxygen lint
-  auxclean html pdf ps dvi safepdf
-  note note_pdf note_safepdf _note
-  note_html note_ps  note_auxclean note_dvi
-  PROPERTIES FOLDER internal)
+if(CPPLINT_FOUND)
+  set_target_properties(lint PROPERTIES FOLDER internal)
+endif(CPPLINT_FOUND)
+
+if(build_utest)
+  set_target_properties(gmock gmock_main gtest gtest_main
+    test_fail test_transforms test_naive_calculator
+    PROPERTIES FOLDER utest)
+endif(build_utest)

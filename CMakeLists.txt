@@ -16,7 +16,7 @@ set(CMAKE_DEBUG_POSTFIX "-d")
 # -----------------------------------------------------------
 option(enable_doxygen "Enables building doxygen docs" ON)
 option(build_notes    "Enable building latex notes"   ON)
-option(build_utest    "Enable/disable utests"         ON)
+option(build_utest    "Enable/disable utests"         OFF)
 
 # -----------------------------------------------------------
 # import the NaiveCalculator::calculator target

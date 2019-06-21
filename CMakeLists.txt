@@ -63,6 +63,7 @@ set_target_properties(example_calculator
 if(build_utest)
   include(CTest)
   add_subdirectory(utest)
+  add_subdirectory(python)
 endif(build_utest)
 
 # -----------------------------------------------------------

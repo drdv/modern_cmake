@@ -17,7 +17,7 @@
 
 ### Build with unit test support
  + pass `-D build_utest=ON` to `cmake`
- + Running unit tests:
+ + Running unit tests (both `C++` and `python`):
    + `make test` (default option)
    + running the tests using the `ctest` command gives us more control
      + `ctest -R naive_calculator` would execute only `test_naive_calculator`

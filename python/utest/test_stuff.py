@@ -17,4 +17,4 @@ class TestStuff(unittest.TestCase):
 
     def test_answer_1(self):
         """Test the answer."""
-        self.assertEqual(stuff.answer() + 1, 42)
+        self.assertEqual(stuff.answer() + 1, 43)
